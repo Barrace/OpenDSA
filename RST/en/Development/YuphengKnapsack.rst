@@ -35,5 +35,14 @@ the user.
 .. avembed:: AV/Development/YuphengKnaps/YuphengKnapsack2.html ss
 
 
+A Khan Academy Exericse with JSAV object for knapsack algorthim
+---------------------------------------------------------------
+
+This example shows how to embed a Khan Academy exercise that has the user identify the 
+maximum by clicking on a JSAV array cell. 
+
+.. avembed:: Exercises/Development/Yuphengknapsack1.html ka
+
+
 .. odsascript:: AV/Development/YuphengKnaps/YuphengKnapsack1.js
 

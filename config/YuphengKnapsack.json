@@ -25,8 +25,18 @@
     "A Simple Example": {
       "Development/YuphengKnapsack": {
         "long_name": "Simple Example of Using a Slide Show in a Book Module",
-        "sections": {}
+        "sections": {
+          "A Khan Academy Exericse with JSAV object": {
+          "Yuphengknapsack1": {
+          "long_name": "KA Exercise Example with JSAV object",
+          "required": true,
+          "points": 1.0,
+          "threshold": 3.0,
+          "showhide": "Show"
+         }
+        }
       }
     }
   }
+}
 }
