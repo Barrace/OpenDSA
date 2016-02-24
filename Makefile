@@ -122,6 +122,9 @@ Pointers: min
 scramble: min
 	python $(CONFIG_SCRIPT) config/scramble.json
 
+AustinKnapsack: min
+	python $(CONFIG_SCRIPT) config/austin_knapsack.json --local
+
 AustinArrayScramble: min
 	python $(CONFIG_SCRIPT) config/AustinArrayScramble.json
 
