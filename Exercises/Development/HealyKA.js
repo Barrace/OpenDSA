@@ -1,7 +1,6 @@
 /*global window */
 (function() {
     "use strict";
-	alert("test");
     var av,         // The JSAV object
     jsavArr;    // The array that the user manipulates (JSAV object)
 
@@ -12,8 +11,7 @@
 	initJSAV: function(arr_size) {
 	    healyKA.userInput = false;
 	    av = new JSAV("HealyKA", {animationMode: "none"});
-	    jsavArr = av.ds.array(JSAV.utils.rand.numKeys(0, 999, arr_size),
-				  {indexed: true, center: false});
+	    jsavArr = av.ds.matrix({rows: 5, columns: 8, syle: "table"});
 	    av.displayInit();
 	    av.recorded();
 	    // bind the clickHandler to handle click events on the array
@@ -23,13 +21,17 @@
 	// Validate user's answer
 	checkAnswer: function() {
 	    var i;
-	    var max_index = 0;
-	    for (i = 1; i < jsavArr.size(); i++) {
-		if (jsavArr.value(i) > jsavArr.value(max_index)) {
-		    max_index = i;
-		}
+	    var max_index_row = 0;
+		var max_index_col = 0;
+	    for (var r = 0; i < jsavArr.rows(); i++) {
+			for (var c = 0; c < jsavArr.columns(); c++) {
+				if (jsavArr.value(r, c) > jsavArr.value(max_index_row, max_index_col)) {
+					max_index_row = r;
+					max_index_col = c;
+				}
+			}
 	    }
-	    if (!jsavArr.isHighlight(max_index)) {
+	    if (!jsavArr.isHighlight(max_index_row, max_index_col)) {
 		return false;
 	    } else {
 		return true;
@@ -38,10 +40,10 @@
     };
 
     // Click event handler on the array
-    function clickHandler(index) {
-	if (jsavArr.isHighlight(index)) {
-	    jsavArr.unhighlight(index);
-	} else { jsavArr.highlight(index); }
+    function clickHandler(indexR, indexC) {
+	if (jsavArr.isHighlight(indexR, indexC)) {
+	    jsavArr.unhighlight(indexR, indexC);
+	} else { jsavArr.highlight(indexR, indexC); }
 	healyKA.userInput = true;
     }
     // Export name used here
