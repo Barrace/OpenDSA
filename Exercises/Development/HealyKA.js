@@ -1,16 +1,17 @@
 /*global window */
 (function() {
     "use strict";
+	alert("test");
     var av,         // The JSAV object
     jsavArr;    // The array that the user manipulates (JSAV object)
 
-    var yuphengknapsack1 = {	// Name of export object
+    var healyKA = {	// Name of export object
 	userInput: null,  // Boolean: Tells us if user ever did anything
 
 	// Initialise the exercise
 	initJSAV: function(arr_size) {
-	    yuphengknapsack1.userInput = false;
-	    av = new JSAV("Yuphengknapsack1", {animationMode: "none"});
+	    healyKA.userInput = false;
+	    av = new JSAV("HealyKA", {animationMode: "none"});
 	    jsavArr = av.ds.array(JSAV.utils.rand.numKeys(0, 999, arr_size),
 				  {indexed: true, center: false});
 	    av.displayInit();
@@ -41,8 +42,8 @@
 	if (jsavArr.isHighlight(index)) {
 	    jsavArr.unhighlight(index);
 	} else { jsavArr.highlight(index); }
-	yuphengknapsack1.userInput = true;
+	healyKA.userInput = true;
     }
     // Export name used here
-    window.yuphengknapsack1 = window.yuphengknapsack1 || yuphengknapsack1;
+    window.healyKA = window.healyKA || healyKA;
 }());

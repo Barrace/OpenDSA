@@ -30,7 +30,7 @@ $(document).ready(function () {
     // interactively, you don't want to do this.
     // av.umsg("Text after av.recorded()");*/
     
-
+//https://gist.github.com/danwoods/7496329
     function knapsack(items, capacity) {
   var idxItem   = 0,
       idxWeight = 0,
