@@ -4,30 +4,23 @@
 .. distributed under an MIT open source license.
 
 .. avmetadata:: 
-   :author: Team member 1, Team member 2, Team member 3
+   :author: Austin Hoefs, AJ Healy, Yupheng Yang
 
 =====================================================================
-Illustrate slide shows and KA exercises in an OpenDSA learning module
+Knapsack Visulization
 =====================================================================
 
-Swapping array elements with a reset button 
+Matrices Testing
 -------------------------------------------
 
-Here we have the same visualization as in the previous inlineav, but
-now as an embedded AV.  Although it is slightly more complicated this
-way, it allows us to process input from the user on the embedded page.
-Here the user can enter a space-separated list of numbers, or if they
-choose to not do so, an OpenDSA utility randomly generates them for
-the user.
+This is getting started with matrices
 
 
 .. avembed:: AV/Development/austin_knapsack.html ss
 
-
-A Khan Academy Exericse with Fill-in-the-blank Question
+Khan Academy Exercise with dynamic addition
 -------------------------------------------------------
 
-This example shows how to embed a Khan Academy exercise that has the user identify the 
-maximum by typing the number into a text box.
+This exercise isn't relating to knapsack but it is a start at dynamic exercises
 
 .. avembed:: Exercises/Development/Austin_knapsack.html ka
