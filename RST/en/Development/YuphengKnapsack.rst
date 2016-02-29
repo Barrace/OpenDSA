@@ -43,6 +43,23 @@ maximum by clicking on a JSAV array cell.
 
 .. avembed:: Exercises/Development/Yuphengknapsack1.html ka
 
+A Khan Academy Exericse with Fill-in-the-blank Question
+-------------------------------------------------------
+
+This example shows how to embed a Khan Academy exercise that has the user identify the 
+maximum by typing the number into a text box.
+
+.. avembed:: Exercises/Development/Yuphengknapsack2.html ka
+
+A Khan Academy Exericse with Multiple Choice Question
+-----------------------------------------------------
+
+This example shows how to embed a Khan Academy exercise that has the user identify the 
+maximum by picking it from a multiple-choice list.
+
+.. avembed:: Exercises/Development/Yuphengknapsack3.html ka
+
+
 
 .. odsascript:: AV/Development/YuphengKnaps/YuphengKnapsack1.js
 

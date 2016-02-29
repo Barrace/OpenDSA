@@ -135,7 +135,8 @@ Tutorial: min
 	python $(CONFIG_SCRIPT) config/Tutorial.json
 
 YuphengKnaps: min
-	python $(CONFIG_SCRIPT) config/YuphengKnapsack.json
+	python $(CONFIG_SCRIPT) config/YuphengKnapsack.json --local
+
 
 ArraySwapping: min
 	python $(CONFIG_SCRIPT) config/Yupheng.json

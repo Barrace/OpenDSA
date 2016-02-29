@@ -3,7 +3,7 @@
     "use strict";
     var my_array;
     
-    var cs342_uwosh_ex3 = {
+    var yuphengknapsack3 = {
 	
 	option: [0,0,0],
 
@@ -58,13 +58,13 @@
 	    my_array[3] = my_array[temp_index];
 	    my_array[temp_index] = temp;
 
-	    cs342_uwosh_ex3.option[0] = my_array[1];
-	    cs342_uwosh_ex3.option[1] = my_array[2];
-	    cs342_uwosh_ex3.option[2] = my_array[3];
+	    yuphengknapsack3.option[0] = my_array[1];
+	    yuphengknapsack3.option[1] = my_array[2];
+	    yuphengknapsack3.option[2] = my_array[3];
 	    return my_array[0];
 	},
 
     };
 
-    window.cs342_uwosh_ex3 = window.cs342_uwosh_ex3 || cs342_uwosh_ex3;
+    window.yuphengknapsack3 = window.yuphengknapsack3 || yuphengknapsack3;
 }());

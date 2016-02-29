@@ -3,7 +3,7 @@
   "use strict";
     var my_array;  
     
-    var cs342_uwosh_ex2 = {
+    var yuphengknapsack2 = {
       
     // Initialise the exercise
       initArr: function(arr_size) {
@@ -39,5 +39,5 @@
   };
     
 
-  window.cs342_uwosh_ex2 = window.cs342_uwosh_ex2 || cs342_uwosh_ex2;
+  window.yuphengknapsack2 = window.yuphengknapsack2 || yuphengknapsack2;
 }());
