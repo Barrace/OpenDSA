@@ -265,3 +265,5 @@ A multiple choice Khan Academy Exercise if we need it.
 
 .. odsascript:: AV/Development/YuphengKnaps/YuphengKnapsack1.js
 
+.. odsascript:: AV/Development/YuphengKnaps/knapsack.js
+
