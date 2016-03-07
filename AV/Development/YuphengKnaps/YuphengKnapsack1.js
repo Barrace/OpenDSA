@@ -9,27 +9,46 @@ $(document).ready(function () {
 	var knap = initKnapsack();
     var arr;
 
+	/*
+
+	We now have access to these important variables.
+
+	knap.data.numItems
+	knap.data.capacity
+	
+	knap.items is an array of objects containing a w and a v. array index is item #
+
+	arr = av.ds.matrix({rows: knap.data.numItems + 2, columns: knap.data.capacity + 1, style: "table"});	
+
+	arr.value(0,0,"V");
+
+	//initiate label row
+	for (var i=1; i<=knap.data.capacity; i++)
+	{
+		arr.value(i,0,i);
+	}
+
+	//initiate label col
+	for (var i=1; i<knap.data.numItems + 2; i++)
+	{
+		arr.value(0,i,i-1);
+	}
+
+	//initiate first row
+	for (var i=0; i<=knap.data.capacity; i++)
+	{
+		arr.value(0, i, 0);
+	}
+
+	*/
+
     var av = new JSAV("YuphengKnapsack1");
 
     arr = av.ds.matrix({rows: knap.data.numItems, columns: knap.data.capacity, style: "table"});
 
     arr.value(0,0,"V");
-    arr.value(0,1,1);
-    arr.value(0,2,2);
-    arr.value(0,3,3);
-    arr.value(0,4,4);
-    arr.value(0,5,5);
-    
-    arr.value(1,0,0);
-    arr.value(2,0,1);
-    arr.value(3,0,2);
-    arr.value(4,0,3);
 
-    //console.log(a);
-    av.umsg("Text before displayInit()");
-    // Note: av.displayInit() will not affect the number of slides.
-    // All that it will do is affect what you get to see on the
-    // initial slide.
+    av.umsg("click through to watch the problem solve itself!");
     av.displayInit();
 
     // We are now starting a new slide (#2)
@@ -81,17 +100,8 @@ $(document).ready(function () {
     arr.value(4,5,9);
     av.step();
 
-    // array[funcname].apply(array, [].slice.call(arguments, 1));
-    // We are now starting a new slide (#3)
-    av.umsg("Text after av.step()");
+
     av.recorded();
-    // If you add av.umsg after av.recorded, it will add new slides in
-    // ways that you probably do not expect and probably cannot
-    // control in the way that you want. As av.recorded() rewinds the
-    // slideshow, the new slides would go to the beginning of the slideshow.
-    // So, unless you are trying to add slides on-the-fly
-    // interactively, you don't want to do this.
-    // av.umsg("Text after av.recorded()");
 
 
 });
