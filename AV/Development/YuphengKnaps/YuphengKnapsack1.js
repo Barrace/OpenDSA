@@ -4,44 +4,15 @@ $(document).ready(function () {
 
 
     JSAV.init();
+
+
+	var knap = initKnapsack();
     var arr;
 
     var av = new JSAV("YuphengKnapsack1");
-    //var theArray = av.ds.matrix({rows: 5, columns: 6, style: "table"});
-    var weighCompa = av.ds.matrix([[" ","V","W"], ["I",5,3], ["II",3,2], ["III",4,1]], {left: true});
-    var a = [0," "," "," "," "," "],
-        b = [1," "," "," "," "," "],
-        c = [2," "," "," "," "," "],
-        d = [3," "," "," "," "," "],
-        v = ["V", 1, 2, 3, 4, 5];
-    //a[1] = 0;
-    //alert(a.size());
-    //arr = av.ds.matrix([v, a, b, c, d]);
-    /*for(var ji = 1; ji < a.length; ji++)
-    {
-        //var arr = av.ds.matrix([v, a, b, c, d]);
-        a[ji] = 6;
-        av.step();
-    }*/
-    //av.step();
-    //av.ds.matrix([v, a, b, c, d]); 
-    //arr..highlight([v,a,b,c,d])
-    //arr.hide();
-    //a[2] = 0;
-    //arr.show();
-    
 
-    arr = av.ds.matrix({rows: 5, columns: 6, style: "table"});
-    /*for(var r = 0; r < arr.rows; r++)
-    {
-        for(var c = 0; c < arr.columns; c++)
-        {
-            arr.value(0,0,"V");
-            arr.value(0,c,c);
-            arr.value(r,0,r);
-        }
-        av.step();
-    }*/
+    arr = av.ds.matrix({rows: knap.data.numItems, columns: knap.data.capacity, style: "table"});
+
     arr.value(0,0,"V");
     arr.value(0,1,1);
     arr.value(0,2,2);
@@ -53,23 +24,7 @@ $(document).ready(function () {
     arr.value(2,0,1);
     arr.value(3,0,2);
     arr.value(4,0,3);
-    //alert(arr.rows());
-    //alert(arr.columns());
-    //var arr = av.ds.matrix([[],[],[],[],[],[]]);
-    //var count = 0;
-    /*for(var i = 1; i < arr.rows; i++)
-    {
-        for(var j = 1; j < arr.columns; j++)
-        {
-           arr.value(4,4,count);
-        }
-        count++;
-        arr.step();
-        //arr.show(); 
 
-        
-
-    }*/
     //console.log(a);
     av.umsg("Text before displayInit()");
     // Note: av.displayInit() will not affect the number of slides.
@@ -79,48 +34,7 @@ $(document).ready(function () {
 
     // We are now starting a new slide (#2)
     av.umsg("... and text after displayInit()", {preserve: true});
-    //arr.swap(3,7);
-    //var arr = av.ds.matrix([v, a, b,
-        //c, d]);
-    /*var count = 0;
-    var j = 1;
-    for(var i = 1; i < arr.rows; i++)
-    {
-        //for(var j = 0; j < arr.columns(); j++)
-        //{
-
-            
-            //a.highlight(i+1);
-            
-            arr.value(i,j,count);
-            //arr.value(a[i],0);
-
-            //arr = av.ds.matrix([v,a,b,c,d]);
-            //a.unhighlight(i);
-            //av.recorded();
-            //av.step();
-        //}
-        av.step();
-        j++;
-    }*/
-    //a.value(1,0);
-    //how();
-    //arr.show();
-    //av.step();
-    /*var bool = true;
-    var i = 1,
-        j = 1,
-        count = 0;
-    while(i != arr.rows)
-    {
-        while(j != arr.columns)
-        {
-            arr.value(i,j,count);
-            j++;
-        }
-        i++;
-        av.step();
-    }*/
+    
     arr.value(1,1,0);
     av.step();
     arr.value(1,2,0);
@@ -181,3 +95,109 @@ $(document).ready(function () {
 
 
 });
+
+var initKnapsack = function() {
+	var randNum = function(min, max) {
+		return Math.floor(Math.random()*(max-min+1)+min);
+	};
+
+	var items = [];
+
+	var config = {
+      minItems: 3,
+	  maxItems: 7,
+	  minWeight: 1,
+	  maxWeight: 10,
+	  minValue: 1,
+	  maxValue: 10,
+	  minCapacityPercent: 65,
+	  maxCapacityPercent: 85
+	}
+
+	var data = {
+		numItems: randNum(config.minItems, config.maxItems),
+	  sumItemsWeight: 0
+	}
+
+	var itemWeight, itemValue, tempItem;
+	for(var i=0; i <= data.numItems; i++){
+	  itemWeight = randNum(config.minWeight, config.maxWeight);
+	  itemValue = randNum(config.minValue, config.maxValue);
+	  tempItem = {
+	  	w: itemWeight,
+		v: itemValue
+	  };
+	  items.push(tempItem);
+	  data.sumItemsWeight += tempItem.w;
+	}
+
+	var percentageDif = randNum(config.minCapacityPercent, config.maxCapacityPercent) / 100;
+	data.capacity = Math.floor(percentageDif * data.sumItemsWeight);
+
+	return {
+		items: items,
+		data: data
+	};
+};
+
+function knapsack(items, capacity) {
+  var idxItem   = 0,
+      idxWeight = 0,
+      oldMax    = 0,
+      newMax    = 0,
+      numItems  = items.length,
+      weightMatrix  = new Array(numItems+1),
+      keepMatrix    = new Array(numItems+1),
+      solutionSet   = [];
+
+  // Setup matrices
+  for(idxItem = 0; idxItem < numItems + 1; idxItem++){
+    weightMatrix[idxItem] = new Array(capacity+1);
+    keepMatrix[idxItem]   = new Array(capacity+1);
+  }
+
+  // Build weightMatrix from [0][0] -> [numItems-1][capacity-1]
+  for (idxItem = 0; idxItem <= numItems; idxItem++){
+    for (idxWeight = 0; idxWeight <= capacity; idxWeight++){
+
+      // Fill top row and left column with zeros
+      if (idxItem === 0 || idxWeight === 0){
+        weightMatrix[idxItem][idxWeight] = 0;
+      }
+
+      // If item will fit, decide if there's greater value in keeping it,
+      // or leaving it
+      else if (items[idxItem-1].w <= idxWeight){
+        newMax = items[idxItem-1].v + weightMatrix[idxItem-1][idxWeight-items[idxItem-1].w];
+        oldMax = weightMatrix[idxItem-1][idxWeight];
+
+        // Update the matrices
+        if(newMax > oldMax){ 
+          weightMatrix[idxItem][idxWeight]  = newMax;
+          keepMatrix[idxItem][idxWeight]    = 1;
+        }
+        else{
+          weightMatrix[idxItem][idxWeight]  = oldMax; 
+          keepMatrix[idxItem][idxWeight]    = 0;
+        }
+      }
+
+      // Else, item can't fit; value and weight are the same as before
+      else{
+        weightMatrix[idxItem][idxWeight] = weightMatrix[idxItem-1][idxWeight];
+      }
+    }
+  }
+
+  // Traverse through keepMatrix ([numItems][capacity] -> [1][?])
+  // to create solutionSet
+  idxWeight = capacity;
+  idxItem   = numItems;
+  for(idxItem; idxItem > 0; idxItem--){
+    if(keepMatrix[idxItem][idxWeight] === 1){
+      solutionSet.push(items[idxItem - 1]);
+      idxWeight = idxWeight - items[idxItem - 1].w;
+    }
+  }
+  return {"maxValue": weightMatrix[numItems][capacity], "set": solutionSet, "keep": keepMatrix};
+}
