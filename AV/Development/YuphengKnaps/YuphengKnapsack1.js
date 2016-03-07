@@ -9,7 +9,7 @@ $(document).ready(function () {
 	var knap = initKnapsack();
     var arr;
 
-	/*
+	/*	AJ's notes
 
 	We now have access to these important variables.
 
@@ -17,6 +17,8 @@ $(document).ready(function () {
 	knap.data.capacity
 	
 	knap.items is an array of objects containing a w and a v. array index is item #
+
+	*/
 
 	arr = av.ds.matrix({rows: knap.data.numItems + 2, columns: knap.data.capacity + 1, style: "table"});	
 
@@ -40,10 +42,11 @@ $(document).ready(function () {
 		arr.value(0, i, 0);
 	}
 
-	*/
 
     var av = new JSAV("YuphengKnapsack1");
 
+
+/*original fixed values
     arr = av.ds.matrix({rows: knap.data.numItems, columns: knap.data.capacity, style: "table"});
 
     arr.value(0,0,"V");
@@ -100,7 +103,7 @@ $(document).ready(function () {
     arr.value(4,5,9);
     av.step();
 
-
+*/
     av.recorded();
 
 
