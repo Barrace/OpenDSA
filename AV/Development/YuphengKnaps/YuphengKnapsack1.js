@@ -28,7 +28,6 @@ $(document).ready(function () {
     });
 
     arr.value(0, 0, "V");
-    //arr.value(0, 1, "V2");
 
     //initiate label row
     for (var i = 1; i <= matrixRows - 1; i++) {

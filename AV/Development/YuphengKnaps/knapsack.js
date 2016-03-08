@@ -92,7 +92,6 @@ var Knapsack = new function () {
                         weightMatrix[idxItem][idxWeight] = oldMax;
                         keepMatrix[idxItem][idxWeight] = 0;
                         if(idxItem >= 1 && idxWeight >= 1){
-                            //arr.value(idxItem, idxWeight, oldMax);
                             arr.value(idxItem, idxWeight, oldMax);
                             av.step();   
                         }
@@ -103,7 +102,6 @@ var Knapsack = new function () {
                 else {
                     weightMatrix[idxItem][idxWeight] = weightMatrix[idxItem - 1][idxWeight];
                     if(idxItem >= 1 && idxWeight >= 1){
-                        //arr.value(idxItem, idxWeight, oldMax);
                         arr.value(idxItem, idxWeight, weightMatrix[idxItem - 1][idxWeight]);
                         av.step();   
                     }
@@ -121,7 +119,6 @@ var Knapsack = new function () {
                 idxWeight = idxWeight - items[idxItem - 1].w;
             }
         }
-        console.log(weightMatrix);
         return {
             "maxValue": weightMatrix[numItems][capacity],
             "set": solutionSet,
