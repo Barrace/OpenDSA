@@ -43,82 +43,76 @@ var Knapsack = new function () {
         };
     };
 
-    this.knapsack = function (items, capacity, arr, av) {
-        var idxItem = 0,
-            idxWeight = 0,
-            oldMax = 0,
-            newMax = 0,
-            numItems = items.length,
-            weightMatrix = new Array(numItems + 1),
-            keepMatrix = new Array(numItems + 1),
-            solutionSet = [];
+    this.knapsack = function (items, capacity, matrix, inKeepMatrix, av) {
+		  var idxItem   = 0,
+			  idxWeight = 0,
+			  oldMax    = 0,
+			  newMax    = 0,
+			  numItems  = items.length,
+			  weightMatrix  = new Array(numItems+1),
+			  keepMatrix    = new Array(numItems+1),
+			  solutionSet   = [];
 
-        // Setup matrices
-        for (idxItem = 0; idxItem < numItems + 1; idxItem++) {
-            weightMatrix[idxItem] = new Array(capacity + 1);
-            keepMatrix[idxItem] = new Array(capacity + 1);
-        }
+		  // Setup matrices
+		  for(idxItem = 0; idxItem < numItems + 1; idxItem++){
+			weightMatrix[idxItem] = new Array(capacity+1);
+			keepMatrix[idxItem]   = new Array(capacity+1);
+		  }
 
-        // Build weightMatrix from [0][0] -> [numItems-1][capacity-1]
-        for (idxItem = 0; idxItem <= numItems; idxItem++) {
-            for (idxWeight = 0; idxWeight <= capacity; idxWeight++) {
-                
-                //Fill matrix top row with zeros
-                if(idxItem === 1 && idxWeight !== 0){
-                    arr.value(idxItem, idxWeight, 0);
-                    av.step();
-                    weightMatrix[idxItem][idxWeight] = 0;
-                }
-                // Fill top row and left column with zeros
-                else if (idxItem === 0 || idxWeight === 0) {
-                    weightMatrix[idxItem][idxWeight] = 0;
-                }
+		  // Build weightMatrix from [0][0] -> [numItems-1][capacity-1]
+		  for (idxItem = 0; idxItem <= numItems; idxItem++){
+			for (idxWeight = 0; idxWeight <= capacity; idxWeight++){
 
-                // If item will fit, decide if there's greater value in keeping it,
-                // or leaving it
-                else if (items[idxItem - 1].w <= idxWeight) {
-                    newMax = items[idxItem - 1].v + weightMatrix[idxItem - 1][idxWeight - items[idxItem - 1].w];
-                    oldMax = weightMatrix[idxItem - 1][idxWeight];
+			  // Fill top row and left column with zeros
+			  if (idxItem === 0 || idxWeight === 0){
+				weightMatrix[idxItem][idxWeight] = 0;
+			  }
 
-                    // Update the matrices
-                    if (newMax > oldMax) {
-                        weightMatrix[idxItem][idxWeight] = newMax;
-                        keepMatrix[idxItem][idxWeight] = 1;
-                       if(idxItem >= 1 && idxWeight >= 1){
-                            arr.value(idxItem, idxWeight, newMax);
-                            av.step();   
-                        }
-                    } else {
-                        weightMatrix[idxItem][idxWeight] = oldMax;
-                        keepMatrix[idxItem][idxWeight] = 0;
-                        if(idxItem >= 1 && idxWeight >= 1){
-                            arr.value(idxItem, idxWeight, oldMax);
-                            av.step();   
-                        }
-                    }
-                }
+			  // If item will fit, decide if there's greater value in keeping it,
+			  // or leaving it
+			  else if (items[idxItem-1].w <= idxWeight){
+				newMax = items[idxItem-1].v + weightMatrix[idxItem-1][idxWeight-items[idxItem-1].w];
+				oldMax = weightMatrix[idxItem-1][idxWeight];
 
-                // Else, item can't fit; value and weight are the same as before
-                else {
-                    weightMatrix[idxItem][idxWeight] = weightMatrix[idxItem - 1][idxWeight];
-                    if(idxItem >= 1 && idxWeight >= 1){
-                        arr.value(idxItem, idxWeight, weightMatrix[idxItem - 1][idxWeight]);
-                        av.step();   
-                    }
-                }
-            }
-        }
+				// Update the matrices
+				if(newMax > oldMax){ 
+				  weightMatrix[idxItem][idxWeight]  = newMax;
+				  keepMatrix[idxItem][idxWeight]    = 1;
+					matrix.value(idxItem + 1, idxWeight, newMax);
+					inKeepMatrix.value(idxItem + 1, idxWeight, 1);
+					av.step();
 
-        // Traverse through keepMatrix ([numItems][capacity] -> [1][?])
-        // to create solutionSet
-        idxWeight = capacity;
-        idxItem = numItems;
-        for (idxItem; idxItem > 0; idxItem--) {
-            if (keepMatrix[idxItem][idxWeight] === 1) {
-                solutionSet.push(items[idxItem - 1]);
-                idxWeight = idxWeight - items[idxItem - 1].w;
-            }
-        }
+				}
+				else{
+				  weightMatrix[idxItem][idxWeight]  = oldMax; 
+				  keepMatrix[idxItem][idxWeight]    = 0;
+					matrix.value(idxItem + 1, idxWeight, oldMax);
+					inKeepMatrix.value(idxItem + 1, idxWeight, 0);
+					av.step();
+
+				}
+			  }
+
+			  // Else, item can't fit; value and weight are the same as before
+			  else{
+				weightMatrix[idxItem][idxWeight] = weightMatrix[idxItem-1][idxWeight];
+				matrix.value(idxItem + 1, idxWeight, weightMatrix[idxItem-1][idxWeight]);
+				inKeepMatrix.value(idxItem + 1, idxWeight, 0);
+				av.step();
+			  }
+			}
+		  }
+
+		  // Traverse through keepMatrix ([numItems][capacity] -> [1][?])
+		  // to create solutionSet
+		  idxWeight = capacity;
+		  idxItem   = numItems;
+		  for(idxItem; idxItem > 0; idxItem--){
+			if(keepMatrix[idxItem][idxWeight] === 1){
+			  solutionSet.push(items[idxItem - 1]);
+			  idxWeight = idxWeight - items[idxItem - 1].w;
+			}
+		  }
         return {
             "maxValue": weightMatrix[numItems][capacity],
             "set": solutionSet,
