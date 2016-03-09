@@ -8,7 +8,7 @@ $(document).ready(function () {
 
     var knap = Knapsack.initKnapsack();
 	//console.log(knap);
-    var weightArr, keepMatrix, valueArr, matrix;
+    var weightArr, keepMatrix, valueArr, matrix, itemsMatrix;
 
     var av = new JSAV("YuphengKnapsack1");
     /*	AJ's notes
@@ -26,22 +26,31 @@ $(document).ready(function () {
 
 	var tempWeightArr = new Array();
 	var tempValueArr = new Array();
+	var tempNumberArr = new Array();
+	
+	tempWeightArr.push("W");
+	tempValueArr.push("V");
+	tempNumberArr.push(" ");
 
 	for (var i=0; i<knap.data.numItems; i++)
 	{
 		tempWeightArr.push(knap.items[i].w);
 		tempValueArr.push(knap.items[i].v);
+		tempNumberArr.push(i + 1);
 	}
 
-	var arrayLayouts = { layout: "vertical", left: true };
+	//weightArr = av.ds.array(tempWeightArr, { layout: "vertical", right: true, relativeTo: valueArr, anchor: "left", indexed: true });
 
-	weightArr = av.ds.array(tempWeightArr, { layout: "vertical", left: true, relativeTo: valueArr, anchor: "left" });
-
-	valueArr = av.ds.array(tempValueArr, { layout: "vertical", left: true, relativeTo: weightArr, anchor: "right" });
+	//valueArr = av.ds.array(tempValueArr, { layout: "vertical", left: true, relativeTo: weightArr, anchor: "right", indexed: true });
 
 
     var matrixRows = knap.data.numItems + 2;
     var matrixCols = knap.data.capacity + 1;
+	
+	itemsMatrix = av.ds.matrix([tempNumberArr, tempWeightArr, tempValueArr ],{
+        style: "table",
+		left: true
+    });
 
     matrix = av.ds.matrix({
         rows: matrixRows,
@@ -52,8 +61,7 @@ $(document).ready(function () {
 	keepMatrix = av.ds.matrix({
 	    rows: matrixRows,
 	    columns: matrixCols,
-	    style: "table"
-		
+	    style: "table"	
 	});
 
 	matrix.value(0, 0, "V");

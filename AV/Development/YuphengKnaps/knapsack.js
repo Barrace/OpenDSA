@@ -12,7 +12,7 @@ var Knapsack = new function () {
             minWeight: 1,
             maxWeight: 5,
             minValue: 1,
-            maxValue: 10,
+            maxValue: 5,
             minCapacityPercent: 60,
             maxCapacityPercent: 75
         }
@@ -22,10 +22,21 @@ var Knapsack = new function () {
             sumItemsWeight: 0
         }
 
-        var itemWeight, itemValue, tempItem;
+        var itemWeight, itemValue, tempItem, lastWeight = -1, lastValue = -1;
         for (var i = 0; i <= data.numItems - 1; i++) {
-            itemWeight = randNum(config.minWeight, config.maxWeight);
-            itemValue = randNum(config.minValue, config.maxValue);
+			
+
+			itemWeight = randNum(config.minWeight, config.maxWeight);
+		    itemValue = randNum(config.minValue, config.maxValue);
+	
+			while(lastWeight === itemWeight || lastValue === itemValue)
+			{
+		        itemWeight = randNum(config.minWeight, config.maxWeight);
+		        itemValue = randNum(config.minValue, config.maxValue);
+			}
+			lastWeight = itemWeight;
+ 			lastValue = itemValue;		
+
             tempItem = {
                 w: itemWeight,
                 v: itemValue
@@ -109,6 +120,8 @@ var Knapsack = new function () {
 		  idxItem   = numItems;
 		  for(idxItem; idxItem > 0; idxItem--){
 			if(keepMatrix[idxItem][idxWeight] === 1){
+			  var item = items[idxItem - 1];
+			  item.i = idxItem;
 			  solutionSet.push(items[idxItem - 1]);
 			  idxWeight = idxWeight - items[idxItem - 1].w;
 			}
