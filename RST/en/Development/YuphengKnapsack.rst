@@ -240,7 +240,7 @@ Exericse 1
 
 Fill in the blank exercise where users will input the next value that will appear in the Matrix.
 
-.. avembed:: Exercises/Development/Yuphengknapsack2.html ka
+.. avembed:: Exercises/Development/KnapsackExercise1.html ka
 
 
 Exercise 2

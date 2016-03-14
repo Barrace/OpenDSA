@@ -9,6 +9,9 @@ var Knapsack = new function () {
         minCapacityPercent: 60,
         maxCapacityPercent: 75
     }
+    
+    //Set below when passed in to knapsack function
+    var currentAv, numTotalIterations, numCurrIterations, randIteration, currentType; 
 
     var randNum = function (min, max, lastNum) {
         var rand = Math.floor(Math.random() * (max - min + 1) + min);
@@ -55,8 +58,19 @@ var Knapsack = new function () {
             data: data
         };
     };
+    
+    var populateMatrix = function(matrix, row, col, val) {
+        matrix.value(row, col, val);
+        currentAv.step();
+        //If we are at our generated random iteration
+        //and this is a fill in the blank exercise, kick
+        //out of the function
+        
+        return (numCurrIterations == randIteration && currentType === "FillInBlank") ? val : -1;
+    }
 
-    this.knapsack = function (items, capacity, matrix, inKeepMatrix, av) {
+    //TODO - Remember to link github where we found base algorithm
+    this.knapsack = function (items, capacity, matrix, inKeepMatrix, av, type) {
         var idxItem = 0,
             idxWeight = 0,
             oldMax = 0,
@@ -65,7 +79,16 @@ var Knapsack = new function () {
             weightMatrix = new Array(numItems + 1),
             keepMatrix = new Array(numItems + 1),
             solutionSet = [];
-
+           
+        //Used in populateMatrix function to avoid another param pass
+        currentAv = av;
+        currentType = type;
+        //Used in populateMatrix function to stop when doing fill
+        //in blank exercise
+        numTotalIterations = (numItems) * (capacity),
+        numCurrIterations = 0;
+        randIteration = randNum(numItems, numTotalIterations);
+        
         // Setup matrices
         for (idxItem = 0; idxItem < numItems + 1; idxItem++) {
             weightMatrix[idxItem] = new Array(capacity + 1);
@@ -75,7 +98,7 @@ var Knapsack = new function () {
         // Build weightMatrix from [0][0] -> [numItems-1][capacity-1]
         for (idxItem = 0; idxItem <= numItems; idxItem++) {
             for (idxWeight = 0; idxWeight <= capacity; idxWeight++) {
-
+                
                 // Fill top row and left column with zeros
                 if (idxItem === 0 || idxWeight === 0) {
                     weightMatrix[idxItem][idxWeight] = 0;
@@ -91,26 +114,33 @@ var Knapsack = new function () {
                     if (newMax > oldMax) {
                         weightMatrix[idxItem][idxWeight] = newMax;
                         keepMatrix[idxItem][idxWeight] = 1;
-                        matrix.value(idxItem + 1, idxWeight, newMax);
-                        inKeepMatrix.value(idxItem + 1, idxWeight, 1);
-                        av.step();
-
+                        //Need to check return val so we know if need to kick out of loop
+                        var popMatrix = populateMatrix(matrix, idxItem + 1, idxWeight, newMax);
+                        if(popMatrix != -1) return popMatrix;
+                        var popKeepMatrix = populateMatrix(inKeepMatrix, idxItem + 1, idxWeight, 1);
+                        if(popKeepMatrix != -1) return popMatrix;                        
+                        numCurrIterations++;
                     } else {
                         weightMatrix[idxItem][idxWeight] = oldMax;
                         keepMatrix[idxItem][idxWeight] = 0;
-                        matrix.value(idxItem + 1, idxWeight, oldMax);
-                        inKeepMatrix.value(idxItem + 1, idxWeight, 0);
-                        av.step();
-
+                        //Need to check return val so we know if need to kick out of loop
+                        var popMatrix = populateMatrix(matrix, idxItem + 1, idxWeight, oldMax);
+                        if(popMatrix != -1) return popMatrix;
+                        var popKeepMatrix = populateMatrix(inKeepMatrix, idxItem + 1, idxWeight, 0);
+                        if(popKeepMatrix != -1) return popMatrix;                        
+                        numCurrIterations++;
                     }
                 }
 
                 // Else, item can't fit; value and weight are the same as before
                 else {
                     weightMatrix[idxItem][idxWeight] = weightMatrix[idxItem - 1][idxWeight];
-                    matrix.value(idxItem + 1, idxWeight, weightMatrix[idxItem - 1][idxWeight]);
-                    inKeepMatrix.value(idxItem + 1, idxWeight, 0);
-                    av.step();
+                    //Need to check return val so we know if need to kick out of loop
+                    var popMatrix = populateMatrix(matrix, idxItem + 1, idxWeight, weightMatrix[idxItem - 1][idxWeight]);
+                    if(popMatrix != -1) return popMatrix;
+                    var popKeepMatrix = populateMatrix(inKeepMatrix, idxItem + 1, idxWeight, 0);
+                    if(popKeepMatrix != -1) return popMatrix;                        
+                    numCurrIterations++;
                 }
             }
         }
@@ -127,10 +157,11 @@ var Knapsack = new function () {
                 idxWeight = idxWeight - items[idxItem - 1].w;
             }
         }
+        
         return {
-            "maxValue": weightMatrix[numItems][capacity],
-            "set": solutionSet,
-            "keep": keepMatrix,
+            maxValue: weightMatrix[numItems][capacity],
+            set: solutionSet,
+            keep: keepMatrix,
             weight: weightMatrix
         };
     }
