@@ -137,6 +137,8 @@ Tutorial: min
 YuphengKnaps: min
 	python $(CONFIG_SCRIPT) config/YuphengKnapsack.json --local
 
+KnapsackDynamic: min
+	python $(CONFIG_SCRIPT) config/KnapsackDynamic.json --local
 
 ArraySwapping: min
 	python $(CONFIG_SCRIPT) config/Yupheng.json
