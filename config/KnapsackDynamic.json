@@ -36,7 +36,7 @@
          }
          },
         "A Khan Academy Exericse with Highlight": {
-        "HightlightExerciseKnapsack": {
+        "HighlightExerciseKnapsack": {
           "long_name": "KA Exercise Example Highlight the Correct Items",
           "required": true,
           "points": 1.0,
