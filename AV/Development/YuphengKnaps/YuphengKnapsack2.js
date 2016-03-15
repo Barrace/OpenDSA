@@ -2,8 +2,15 @@
 /*global alert: true, ODSA */
 
 (function ($) {
-  var av;
- 
+    var av;
+    var weight,
+        value,
+        capacity;
+    var newWeight = [],
+        newValue = [],
+        newCapacity = [];
+
+    var knap = Knapsack.initKnapsack();
 
 function runit() {
     ODSA.AV.reset(true);
@@ -11,30 +18,54 @@ function runit() {
     // Validate the array values a user enters or generate an array of
     // random numbers < 100 of the size selected in the dropdown list
     // if none are provided
-    var theArray = ODSA.AV.processArrayValues(100);
+    //var theArray = ODSA.AV.processArrayValues(5);
 
+    //Convert the string array into an integer array
+    weight = document.getElementById("weight").value.split(", ");
+    for(var i = 0; i < weight.length; i++)
+    {
+        newWeight[i] = parseInt(weight[i]);
+        console.log(newWeight[i]);
+    }
+    value = document.getElementById("value").value.split(", ");
+    for(var i = 0; i < value.length; i++)
+    {
+        newValue[i] = parseInt(value[i]);
+        console.log(newValue[i]);
+    }
+    capacity = document.getElementById("capacity").value.split(", ");
+    for(var i = 0; i < capacity.length; i++)
+    {
+        newCapacity[i] = parseInt(capacity[i]);
+        console.log(newCapacity[i]);
+    }
+    console.log(weight);
+    console.log(value);
+    console.log(capacity);
+
+    //console.log(theArray);
     // If theArray wasn't filled properly, we generate our own 
-    if (!theArray) {
+    /*if (!theArray) {
 	theArray = [];
 	for (var i = 0; i < 12; i++) {
 	    theArray.push(Math.trunc(50 * Math.random() + 10));
 	}
-    }
+    }*/
 
     av = new JSAV($('.avcontainer'));
 
-    var arr = av.ds.array(theArray, {indexed: true});
-    av.umsg("Text before displayInit()");
+    var arr = av.ds.martix(newWeight, {indexed: true});
+    //av.umsg("Text before displayInit()");
     // Note: av.displayInit() will not affect the number of slides.
     // All that it will do is affect what you get to see on the
     // initial slide.
     av.displayInit();
     // We are now starting a new slide (#2)
-    av.umsg("... and text after displayInit()", {preserve: true});
-    arr.swap(3,7);
+    //av.umsg("... and text after displayInit()", {preserve: true});
+    arr.swap(1,2);
     av.step();
     // We are now starting a new slide (#3)
-    av.umsg("Text after av.step()");
+    //av.umsg("Text after av.step()");
     av.recorded();
     // If you add av.umsg after av.recorded, it will add new slides in
     // ways that you probably do not expect and probably cannot
@@ -57,8 +88,7 @@ function help() {
 }
   
 // Initialize the arraysize dropdown list
-ODSA.AV.initArraySize(10, 16, 12); // Between 10 and 16, with default at 12
-
+ODSA.AV.initArraySize(1, 5, 2); // Between 10 and 16, with default at 12
 
 // Connect action callbacks to the HTML entities
 $('#about').click(about);

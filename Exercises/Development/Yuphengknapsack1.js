@@ -19,6 +19,8 @@
 
 	    var matrixRows = arr_size.data.numItems + 2;
 	    var matrixCols = arr_size.data.capacity + 1;
+	    console.log(matrixRows);
+	    console.log(matrixCols);
 
 	    jsavMatrix1 = av.ds.matrix({rows: matrixRows, columns: matrixCols, style: "table"});
 
