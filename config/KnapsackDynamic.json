@@ -36,7 +36,7 @@
          }
          },
         "A Khan Academy Exericse with fill-in-the-blank question": {
-        "KnapsackDynamicEx2": {
+        "HighlightExerciseKnapsack": {
           "long_name": "KA Exercise Example with fill in the blank question",
           "required": true,
           "points": 1.0,
