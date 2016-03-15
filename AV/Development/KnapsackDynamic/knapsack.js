@@ -61,15 +61,12 @@ var Knapsack = new function () {
     
     var populateMatrix = function(matrix, row, col, val) {
         matrix.value(row, col, val);
-        currentAv.step();
         //If we are at our generated random iteration
         //and this is a fill in the blank exercise, kick
         //out of the function
-        
         return (numCurrIterations == randIteration && currentType === "FillInBlank") ? val : -1;
     }
 
-    //TODO - Remember to link github where we found base algorithm
     this.knapsack = function (items, capacity, matrix, inKeepMatrix, av, type) {
         var idxItem = 0,
             idxWeight = 0,
@@ -118,7 +115,8 @@ var Knapsack = new function () {
                         var popMatrix = populateMatrix(matrix, idxItem + 1, idxWeight, newMax);
                         if(popMatrix != -1) return popMatrix;
                         var popKeepMatrix = populateMatrix(inKeepMatrix, idxItem + 1, idxWeight, 1);
-                        if(popKeepMatrix != -1) return popMatrix;                        
+                        if(popKeepMatrix != -1) return popMatrix;   
+                        currentAv.step();                     
                         numCurrIterations++;
                     } else {
                         weightMatrix[idxItem][idxWeight] = oldMax;
@@ -127,7 +125,8 @@ var Knapsack = new function () {
                         var popMatrix = populateMatrix(matrix, idxItem + 1, idxWeight, oldMax);
                         if(popMatrix != -1) return popMatrix;
                         var popKeepMatrix = populateMatrix(inKeepMatrix, idxItem + 1, idxWeight, 0);
-                        if(popKeepMatrix != -1) return popMatrix;                        
+                        if(popKeepMatrix != -1) return popMatrix;  
+                        currentAv.step();                      
                         numCurrIterations++;
                     }
                 }
@@ -139,7 +138,8 @@ var Knapsack = new function () {
                     var popMatrix = populateMatrix(matrix, idxItem + 1, idxWeight, weightMatrix[idxItem - 1][idxWeight]);
                     if(popMatrix != -1) return popMatrix;
                     var popKeepMatrix = populateMatrix(inKeepMatrix, idxItem + 1, idxWeight, 0);
-                    if(popKeepMatrix != -1) return popMatrix;                        
+                    if(popKeepMatrix != -1) return popMatrix;     
+                    currentAv.step();                   
                     numCurrIterations++;
                 }
             }
