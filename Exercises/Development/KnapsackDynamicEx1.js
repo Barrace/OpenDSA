@@ -3,11 +3,11 @@
     "use strict";
     var av, matrix, keepMatrix, nextMatrixValue;
 
-    var knap = Knapsack.initKnapsack();
+    //var knap = Knapsack.initKnapsack();
 
     var knapsackExercise1 = {
 
-        initJSAV: function () {
+        initJSAV: function (knap) {
             av = new JSAV("KnapsackExercise1", {
                 animationMode: "none"
             });
