@@ -35,9 +35,9 @@
           "showhide": "Show"
          }
          },
-        "A Khan Academy Exericse with fill-in-the-blank question": {
-        "HighlightExerciseKnapsack": {
-          "long_name": "KA Exercise Example with fill in the blank question",
+        "A Khan Academy Exericse with Highlight": {
+        "HightlightExerciseKnapsack": {
+          "long_name": "KA Exercise Example Highlight the Correct Items",
           "required": true,
           "points": 1.0,
           "threshold": 3.0,
