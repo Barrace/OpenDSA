@@ -9,8 +9,8 @@
     var newWeight = [],
         newValue = [],
         newCapacity = [];
-
-    var knap = Knapsack.initKnapsack();
+    //var knap = Knapsack.initKnapsack();
+    
 
 function runit() {
     ODSA.AV.reset(true);
@@ -33,12 +33,11 @@ function runit() {
         newValue[i] = parseInt(value[i]);
         console.log(newValue[i]);
     }
-    capacity = document.getElementById("capacity").value.split(", ");
-    for(var i = 0; i < capacity.length; i++)
-    {
-        newCapacity[i] = parseInt(capacity[i]);
-        console.log(newCapacity[i]);
-    }
+    capacity = document.getElementById("capacity").value;
+
+        newCapacity = parseInt(capacity);
+        console.log(newCapacity);
+
     console.log(weight);
     console.log(value);
     console.log(capacity);
@@ -52,9 +51,19 @@ function runit() {
 	}
     }*/
 
+    var matrixRow = newWeight.length;
+    var matrixCol = newValue.length;
+
+    var items;
+    for(var i = 0; i < matrixRow; i++)
+    {
+        
+    }
+
     av = new JSAV($('.avcontainer'));
 
-    var arr = av.ds.martix(newWeight, {indexed: true});
+    var arr = av.ds.matrix({rows: matrixRow, columns: matrixCol, style: "table"});
+    
     //av.umsg("Text before displayInit()");
     // Note: av.displayInit() will not affect the number of slides.
     // All that it will do is affect what you get to see on the
@@ -62,8 +71,8 @@ function runit() {
     av.displayInit();
     // We are now starting a new slide (#2)
     //av.umsg("... and text after displayInit()", {preserve: true});
-    arr.swap(1,2);
-    av.step();
+    //arr.swap(1,2);
+    //av.step();
     // We are now starting a new slide (#3)
     //av.umsg("Text after av.step()");
     av.recorded();
