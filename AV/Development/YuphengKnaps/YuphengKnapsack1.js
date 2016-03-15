@@ -50,7 +50,7 @@ $(document).ready(function () {
 	itemsMatrix = av.ds.matrix([tempNumberArr, tempWeightArr, tempValueArr ],{
         style: "table",
 		left: true
-    });
+	});
 
     matrix = av.ds.matrix({
         rows: matrixRows,

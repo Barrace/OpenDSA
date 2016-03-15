@@ -2,11 +2,12 @@
 (function() {
     "use strict";
     var av,         // The JSAV object
-    jsavArr,
-    jsavMatrix1,
-    jsavMatrix2;    // The array that the user manipulates (JSAV object)
+    jsavArr,		// The array that the user manipulates (JSAV object)
+    jsavMatrix1,	// Matrix for weight
+    jsavMatrix2;    // Matrix for keep
 
-    var knap = Knapsack.initKnapsack();
+    var solutionArray = [];
+    var lastArr = [];
 
     var yuphengknapsack1 = {	// Name of export object
 	userInput: null,  // Boolean: Tells us if user ever did anything
@@ -16,8 +17,8 @@
 	    yuphengknapsack1.userInput = false;
 	    av = new JSAV("Yuphengknapsack1", {animationMode: "none"});
 
-	    var matrixRows = knap.data.numItems + 2;
-	    var matrixCols = knap.data.capacity + 1;
+	    var matrixRows = arr_size.data.numItems + 2;
+	    var matrixCols = arr_size.data.capacity + 1;
 
 	    jsavMatrix1 = av.ds.matrix({rows: matrixRows, columns: matrixCols, style: "table"});
 
@@ -44,27 +45,23 @@
 			jsavMatrix2.value(1, i, 0);
 		}
 
-		var temp = Knapsack.knapsack(knap.items, knap.data.capacity, jsavMatrix1, jsavMatrix2, av);
-	    console.log(temp);
+		var objForMatrix = Knapsack.knapsack(arr_size.items, arr_size.data.capacity, jsavMatrix1, jsavMatrix2, av);
+	    console.log(objForMatrix);
 
-		var arr = temp.weight;
+		var arr = objForMatrix.set;
 		console.log(arr);
-		var lastArr = [];
+		
 
-		//Getting the last array of the weight object. 
-		for(var p = arr.length-1; p < arr.length; p++)
+		for(var i = 1; i < matrixRows - 1; i++)
 		{
-			for(var r = 0; r < arr[p].length; r++)
-			{
-				
-				lastArr[r] = arr[p][r];
-			}
+			lastArr[i-1] = i;
 		}
 
-		//Checking the array if it contains the same items as the other array.
-		for(var o = 0; o < lastArr.length; o++)
+		//Getting the items from the set object. 
+		for(var p = 0; p < arr.length; p++)
 		{
-			console.log(lastArr[o]);
+			console.log(arr[p].i);
+			solutionArray[p] = arr[p].i;
 		}
 
 		jsavArr = av.ds.array(lastArr,
@@ -74,25 +71,44 @@
 	    av.recorded();
 	    // bind the clickHandler to handle click events on the array
 	    jsavArr.click(clickHandler);
-	    //jsavMatrix1.click(clickHandler);
 	},
 
 	// Validate user's answer
 	checkAnswer: function() {
-	    var i;
-	    var max_index = 0;
-	    for (i = 1; i < jsavArr.size(); i++) {
-		if (jsavArr.value(i) > jsavArr.value(max_index)) {
-		    max_index = i;
-		}
+	    for(var i = 0; i < jsavArr.size(); i++)
+	    {
+	    	for(var j = 0; j < solutionArray.length; j++)
+	    	{
+	    		if(jsavArr.value(i) == solutionArray[j])
+	    		{
+
+	    			if(!jsavArr.isHighlight(i))
+	    				return false;
+	    		}
+	    	}
 	    }
-	    if (!jsavArr.isHighlight(max_index)) {
-		return false;
-	    } else {
-		return true;
+	    for(var i = 0; i < jsavArr.size(); i++)
+	    {
+	    	if(jsavArr.isHighlight(i))
+	    	{
+	    		if(!contains(solutionArray, jsavArr.value(i)))
+	    			return false;
+	    	}
 	    }
+	    return true;
 	}
     };
+
+    //We created a contains method to check if the array contains the solution array. 
+	var contains = function (arr, i)
+	{
+    	for (var k=0; k<arr.length; k++)
+    	{
+        	if (i == arr[k])
+            	return true;
+    	}
+    	return false;
+	};
 
     // Click event handler on the array
     function clickHandler(index) {
