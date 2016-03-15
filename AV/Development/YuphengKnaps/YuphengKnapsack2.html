@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Another simple example but with embedded AV</title>
+  <title>Knapsack Embedded Slideshow</title>
   <meta charset="utf-8" />
   <link rel="stylesheet" href="../../../JSAV/css/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../../../lib/odsaAV-min.css" type="text/css" />
@@ -17,7 +17,7 @@
         <input type="button" id="help" name="help" value="Help" />
       </td>
       <td class="headerCenter avTitle">
-        Slideshow with array that can be reset to different values
+        Knapsack Embedded Slideshow
       </td>
       <td class="headerRight">
         <input type="button" id="about" name="about" value="About" />
@@ -29,12 +29,8 @@
     <p>
       <input type="button" id="runit" name="runit" value="Run" />
       <input type="button" id="reset" name="reset" value="Reset" />
-      <label id="arraysizeLabel" for="arraysize"></label>
-      <select id="arraysize"></select>
     </p>
     <p>
-      <!-- <label id="arrayValuesLabel" for="arrayValues"></label>
-      <input size="60" name="arrayValues" id="arrayValues" type="text" /> -->
       <label id="Weight"> Weight </label>
       <input type="text" name="weight[]" id="weight" size="arraysize" />
     </p>
@@ -62,6 +58,7 @@
 <script src="../../../JSAV/build/JSAV-min.js"></script>
 <script src="../../../lib/odsaUtils.js"></script>
 <script src="../../../lib/odsaAV.js"></script>
+<script src="knapsack.js"></script>
 <script src="YuphengKnapsack2.js"></script>
 </body>
 </html>

@@ -6,83 +6,109 @@
     var weight,
         value,
         capacity;
-    var newWeight = [],
-        newValue = [],
-        newCapacity = [];
+    var keepMatrix, matrix, itemsMatrix;
     //var knap = Knapsack.initKnapsack();
     
 
 function runit() {
     ODSA.AV.reset(true);
 
-    // Validate the array values a user enters or generate an array of
-    // random numbers < 100 of the size selected in the dropdown list
-    // if none are provided
-    //var theArray = ODSA.AV.processArrayValues(5);
-
-    //Convert the string array into an integer array
-    weight = document.getElementById("weight").value.split(", ");
-    for(var i = 0; i < weight.length; i++)
-    {
-        newWeight[i] = parseInt(weight[i]);
-        console.log(newWeight[i]);
-    }
-    value = document.getElementById("value").value.split(", ");
-    for(var i = 0; i < value.length; i++)
-    {
-        newValue[i] = parseInt(value[i]);
-        console.log(newValue[i]);
-    }
-    capacity = document.getElementById("capacity").value;
-
-        newCapacity = parseInt(capacity);
-        console.log(newCapacity);
-
-    console.log(weight);
-    console.log(value);
-    console.log(capacity);
-
-    //console.log(theArray);
-    // If theArray wasn't filled properly, we generate our own 
-    /*if (!theArray) {
-	theArray = [];
-	for (var i = 0; i < 12; i++) {
-	    theArray.push(Math.trunc(50 * Math.random() + 10));
-	}
-    }*/
-
-    var matrixRow = newWeight.length;
-    var matrixCol = newValue.length;
-
-    var items;
-    for(var i = 0; i < matrixRow; i++)
-    {
+    var itemNum, itemWeight, itemValue, newItem, items = [];
+    weight = document.getElementById("weight").value.trim().split(",");
+    value = document.getElementById("value").value.trim().split(",");
+    capacity = parseInt(document.getElementById("capacity").value);
+    
+    //Weight and val should be same length so if not gen random
+    if(weight.length != value.length || (!weight.length || !value.lenght)){
+        var knap = Knapsack.initKnapsack();
+        items = knap.items;
+        capacity = knap.data.capacity;
         
+    } else {
+        for(var i = 0; i < weight.length; i++){
+            itemNum = i + 1;
+            itemWeight = weight[i];
+            itemValue = value[i];
+            newItem = {
+                i: itemNum,
+                w: itemWeight,
+                v: itemValue
+            };
+            items.push(newItem);
+        }
     }
+
+   console.log(capacity);
+   console.log(items, items.length);
 
     av = new JSAV($('.avcontainer'));
 
-    var arr = av.ds.matrix({rows: matrixRow, columns: matrixCol, style: "table"});
-    
-    //av.umsg("Text before displayInit()");
-    // Note: av.displayInit() will not affect the number of slides.
-    // All that it will do is affect what you get to see on the
-    // initial slide.
+    var tempWeightArr = new Array();
+	var tempValueArr = new Array();
+	var tempNumberArr = new Array();
+	
+	tempWeightArr.push("W");
+	tempValueArr.push("V");
+	tempNumberArr.push(" ");
+
+	for (var i=0; i < items.length; i++)
+	{
+		tempWeightArr.push(items[i].w);
+		tempValueArr.push(items[i].v);
+		tempNumberArr.push(i + 1);
+	}
+
+	//weightArr = av.ds.array(tempWeightArr, { layout: "vertical", right: true, relativeTo: valueArr, anchor: "left", indexed: true });
+
+	//valueArr = av.ds.array(tempValueArr, { layout: "vertical", left: true, relativeTo: weightArr, anchor: "right", indexed: true });
+
+
+    var matrixRows = items.length + 2;
+    var matrixCols = capacity + 1;
+	
+	itemsMatrix = av.ds.matrix([tempNumberArr, tempWeightArr, tempValueArr ],{
+        style: "table",
+		left: true
+    });
+
+    matrix = av.ds.matrix({
+        rows: matrixRows,
+        columns: matrixCols,
+        style: "table"
+    });
+
+	keepMatrix = av.ds.matrix({
+	    rows: matrixRows,
+	    columns: matrixCols,
+	    style: "table"	
+	});
+
+	matrix.value(0, 0, "V");
+	keepMatrix.value(0, 0, "K");
+
+    for (var i = 1; i < matrixCols; i++) {
+        matrix.value(0, i, i);
+		keepMatrix.value(0, i, i);
+    }
+
+    //initiate label col
+    for (var i = 0; i < matrixRows - 1; i++) {
+        matrix.value(i + 1, 0, i);
+		keepMatrix.value(i + 1, 0, i);
+    }
+
+    //initiate first row
+    for (var i = 0; i < matrixCols; i++) {
+        matrix.value(1, i, 0);
+		keepMatrix.value(1, i, 0);
+	}
+
     av.displayInit();
-    // We are now starting a new slide (#2)
-    //av.umsg("... and text after displayInit()", {preserve: true});
-    //arr.swap(1,2);
-    //av.step();
-    // We are now starting a new slide (#3)
-    //av.umsg("Text after av.step()");
+
+    Knapsack.knapsack(items, capacity, matrix, keepMatrix, av);
+
+
     av.recorded();
-    // If you add av.umsg after av.recorded, it will add new slides in
-    // ways that you probably do not expect and probably cannot
-    // control in the way that you want. As av.recorded() rewinds the
-    // slideshow, the new slides would go to the beginning of the slideshow.
-    // So, unless you are trying to add slides on-the-fly
-    // interactively, you don't want to do this.
-    // av.umsg("Text after av.recorded()");
 
 }
 
