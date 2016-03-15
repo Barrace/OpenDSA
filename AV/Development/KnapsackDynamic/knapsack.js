@@ -158,6 +158,13 @@ var Knapsack = new function () {
             }
         }
         
+        var itemsToKeep = [];
+        for(var i = 0; i < solutionSet.length; i++){
+            itemsToKeep.push(solutionSet[i].i);
+        }
+        console.log(solutionSet, itemsToKeep);
+        av.umsg("For this problem you will keep the following items: " + itemsToKeep.join(", "));
+        
         return {
             maxValue: weightMatrix[numItems][capacity],
             set: solutionSet,

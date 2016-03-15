@@ -7,9 +7,7 @@
         value,
         capacity;
     var keepMatrix, matrix, itemsMatrix;
-    //var knap = Knapsack.initKnapsack();
     
-
 function runit() {
     ODSA.AV.reset(true);
 
@@ -19,11 +17,12 @@ function runit() {
     capacity = parseInt(document.getElementById("capacity").value);
     
     //Weight and val should be same length so if not gen random
-    if(weight.length != value.length || (!weight.length || !value.lenght)){
+    if(weight.length != value.length || (weight.length == 0 || value.length == 0)
+        || (weight[0] === "" || value[0] === "")){
         var knap = Knapsack.initKnapsack();
         items = knap.items;
         capacity = knap.data.capacity;
-        
+        alert("Invalid knapsack data entered, a problem has been generated for you");
     } else {
         for(var i = 0; i < weight.length; i++){
             itemNum = i + 1;
@@ -57,11 +56,6 @@ function runit() {
 		tempValueArr.push(items[i].v);
 		tempNumberArr.push(i + 1);
 	}
-
-	//weightArr = av.ds.array(tempWeightArr, { layout: "vertical", right: true, relativeTo: valueArr, anchor: "left", indexed: true });
-
-	//valueArr = av.ds.array(tempValueArr, { layout: "vertical", left: true, relativeTo: weightArr, anchor: "right", indexed: true });
-
 
     var matrixRows = items.length + 2;
     var matrixCols = capacity + 1;
@@ -112,14 +106,12 @@ function runit() {
 
 }
 
-
-
 function about() {
-   alert("Simple array visualization");
+   alert("Enter a list of weights, values, and a capacity to watch the problem be solved.");
 }
   
 function help() {
-   alert("Help for simple array visualization");
+   alert("Enter values seperated by commas for values and weights then a number for capacity");
 }
   
 // Initialize the arraysize dropdown list
