@@ -229,7 +229,7 @@ The following slideshow demonstrates an example of the 0/1 Knapsack problem with
 Knapsack with User Input 
 -------------------------------------
 
-Here we have the same visualization with the option to have the user input their values for the problem. For example, the first text box should hold the weight values which should take in numbers followed by a comma (,). Also do the same input for the value text box. Then use only one input for the capacity text box. Also select the number of items you're entering from the list next to Reset.
+Here we have the same visualization with the option to have the user input their values for the problem. For example, the first text box should hold the weight values which should take in numbers followed by a comma (,). Also do the same input for the value text box. Then use only one input for the capacity text box.
 
 
 .. avembed:: AV/Development/KnapsackDynamic/EmbeddedKnapsackDynamic.html ss
