@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<!-- Cap C here matches file name -->
+<html data-require="jsav math HightlightExerciseKnapsack">
+  <head>
+    <title>Find a Maximum</title>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.14/require.min.js"></script>
+    <script src="../../khan-exercises/local-only/main.js" ></script>
+    <script src="../../AV/Development/KnapsackDynamic/knapsack.js" ></script>
+  </head>
+
+  <body data-height="950" data-width="950">
+    <div class="exercise">
+      <div class="vars">
+        <var id="arrSize">Knapsack.initKnapsack()</var>
+	<var id="lastIndex">arrSize - 1</var>
+	<!-- Lower case C here matches export name -->
+        <var id="JSAV">hightlightExerciseKnapsack.initJSAV(arrSize)</var>
+      </div>
+      <div class="problems">
+	<!-- Cap C and trailing p necessary here -->
+        <div id="HightlightExerciseKnapsackp">
+          <div class="question">
+            <p>Highlight the valid items that makes this problem right.</p>
+            <p>You must highlight the right item or items in the array to get this problem right.</p>
+	    <!-- Cap C here -->
+            <div id="HightlightExerciseKnapsack" class="jsavcanvas"></div>
+          </div>
+          <div class="solution" data-type="custom">
+	    <!-- Lower case C here matches export name -->
+            <div class="guess"> [hightlightExerciseKnapsack.userInput] </div>
+            <div class="validator-function">
+              if (!guess[0]) {
+                return ""; // User did not click anything
+              } else { return hightlightExerciseKnapsack.checkAnswer(); }
+            </div>
+          </div>
+          <div class="hints">
+            <p>Choose something between 0 and index of the number items.<var>lastIndex</var> </p>
+            <p>Think about what items you will get for the knapsack problem.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

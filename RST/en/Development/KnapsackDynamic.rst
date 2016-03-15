@@ -229,7 +229,7 @@ The following slideshow demonstrates an example of the 0/1 Knapsack problem with
 Knapsack with User Input 
 -------------------------------------
 
-Here we have the same visualization with the option to have the user input their values for the problem. For example, items take the syntax - {w:1, v:2},{w:3, v:4} - w being Weight of that item and V being its Value. Also select the number of items you're entering from the list next to Reset.
+Here we have the same visualization with the option to have the user input their values for the problem. For example, the first text box should hold the weight values which should take in numbers followed by a comma (,). Also do the same input for the value text box. Then use only one input for the capacity text box. Also select the number of items you're entering from the list next to Reset.
 
 
 .. avembed:: AV/Development/KnapsackDynamic/EmbeddedKnapsackDynamic.html ss
@@ -249,7 +249,7 @@ Exercise 2
 Given the keep array and the item information, highlight from a list the final items that make it into the knapsack. 
 
 
-.. avembed:: Exercises/Development/KnapsackDynamicEx2.html ka
+.. avembed:: Exercises/Development/HighlightExerciseKnapsack.html ka
 
 
 .. odsascript:: AV/Development/KnapsackDynamic/SlideshowKnapsackDynamic.js
