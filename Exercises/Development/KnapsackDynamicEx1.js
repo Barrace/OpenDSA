@@ -1,7 +1,7 @@
 /*global window */
 (function () {
     "use strict";
-    var av, matrix, keepMatrix, nextMatrixValue;
+    var av, matrix, keepMatrix, nextMatrixValue,itemsMatrix;
 
     //var knap = Knapsack.initKnapsack();
 
@@ -14,6 +14,26 @@
 
             var matrixRows = knap.data.numItems + 2;
             var matrixCols = knap.data.capacity + 1;
+            
+            var tempWeightArr = new Array();
+            var tempValueArr = new Array();
+            var tempNumberArr = new Array();
+
+            tempWeightArr.push("W");
+            tempValueArr.push("V");
+            tempNumberArr.push(" ");
+
+            for (var i=0; i < knap.items.length; i++)
+            {
+                tempWeightArr.push(knap.items[i].w);
+                tempValueArr.push(knap.items[i].v);
+                tempNumberArr.push(i + 1);
+            }
+            
+            itemsMatrix = av.ds.matrix([tempNumberArr, tempWeightArr, tempValueArr ],{
+                style: "table",
+                left: true
+            });
 
             matrix = av.ds.matrix({
                 rows: matrixRows,

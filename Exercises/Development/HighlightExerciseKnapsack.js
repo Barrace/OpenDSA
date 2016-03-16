@@ -4,7 +4,8 @@
     var av,         // The JSAV object
     jsavArr,		// The array that the user manipulates (JSAV object)
     jsavMatrix1,	// Matrix for weight
-    jsavMatrix2;    // Matrix for keep
+    jsavMatrix2,
+    itemsMatrix;    // Matrix for keep
 
     var solutionArray = [];
     var lastArr = [];
@@ -19,8 +20,26 @@
 
 	    var matrixRows = arr_size.data.numItems + 2;
 	    var matrixCols = arr_size.data.capacity + 1;
-	    console.log(matrixRows);
-	    console.log(matrixCols);
+	    
+        var tempWeightArr = new Array();
+        var tempValueArr = new Array();
+        var tempNumberArr = new Array();
+
+        tempWeightArr.push("W");
+        tempValueArr.push("V");
+        tempNumberArr.push(" ");
+
+        for (var i=0; i < arr_size.items.length; i++)
+        {
+            tempWeightArr.push(arr_size.items[i].w);
+            tempValueArr.push(arr_size.items[i].v);
+            tempNumberArr.push(i + 1);
+        }
+        
+        itemsMatrix = av.ds.matrix([tempNumberArr, tempWeightArr, tempValueArr ],{
+            style: "table",
+            left: true
+        });
 
 	    jsavMatrix1 = av.ds.matrix({rows: matrixRows, columns: matrixCols, style: "table"});
 

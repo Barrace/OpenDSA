@@ -25,9 +25,9 @@ function runit() {
         alert("Invalid knapsack data entered, a problem has been generated for you");
     } else {
         for(var i = 0; i < weight.length; i++){
-            itemNum = i + 1;
-            itemWeight = weight[i];
-            itemValue = value[i];
+            itemNum = parseInt(i + 1);
+            itemWeight = parseInt(weight[i]);
+            itemValue = parseInt(value[i]);
             newItem = {
                 i: itemNum,
                 w: itemWeight,
@@ -100,7 +100,6 @@ function runit() {
     av.displayInit();
 
     Knapsack.knapsack(items, capacity, matrix, keepMatrix, av);
-
 
     av.recorded();
 
