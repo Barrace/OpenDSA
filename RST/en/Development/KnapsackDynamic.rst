@@ -238,7 +238,7 @@ Here we have the same visualization with the option to have the user input their
 Exercise 1 - What comes next in V?
 ---------------------------------------------------------------
 
-Fill in the blank exercise where users will input the next value that will appear in the top Matrix.
+Fill in the blank exercise where users will input the next value that will appear in the V Matrix.
 
 .. avembed:: Exercises/Development/KnapsackDynamicEx1.html ka
 
@@ -246,7 +246,7 @@ Fill in the blank exercise where users will input the next value that will appea
 Exercise 2 - Highlight final solution
 -----------------------------------------------------
 
-Given the keep array and the item information, highlight from a list the final items that make it into the knapsack. 
+Given the keep array and the item information, highlight from the bottom list the final items that make it into the knapsack. 
 
 
 .. avembed:: Exercises/Development/HighlightExerciseKnapsack.html ka
