@@ -226,7 +226,7 @@ The following slideshow demonstrates an example of the 0/1 Knapsack problem with
    :output: show
 
 
-Knapsack with User Input 
+Knapsack Slideshow with User Input 
 -------------------------------------
 
 Here we have the same visualization with the option to have the user input their values for the problem. For example, the first text box should hold the weight values which should take in numbers followed by a comma (,). Also do the same input for the value text box. Then use only one input for the capacity text box.
@@ -235,15 +235,15 @@ Here we have the same visualization with the option to have the user input their
 .. avembed:: AV/Development/KnapsackDynamic/EmbeddedKnapsackDynamic.html ss
 
 
-Exericse 1
+Exercise 1 - What comes next in V?
 ---------------------------------------------------------------
 
-Fill in the blank exercise where users will input the next value that will appear in the Matrix.
+Fill in the blank exercise where users will input the next value that will appear in the top Matrix.
 
 .. avembed:: Exercises/Development/KnapsackDynamicEx1.html ka
 
 
-Exercise 2
+Exercise 2 - Highlight final solution
 -----------------------------------------------------
 
 Given the keep array and the item information, highlight from a list the final items that make it into the knapsack. 
