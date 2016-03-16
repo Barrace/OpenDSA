@@ -37,16 +37,15 @@
         }
         
         itemsMatrix = av.ds.matrix([tempNumberArr, tempWeightArr, tempValueArr ],{
-            style: "table",
-            left: true
+            style: "table"
         });
 
-	    jsavMatrix1 = av.ds.matrix({rows: matrixRows, columns: matrixCols, style: "table"});
+	    jsavMatrix1 = av.ds.matrix({rows: matrixRows, columns: matrixCols, style: "table", visible: false});
 
 	    jsavMatrix2 = av.ds.matrix({rows: matrixRows, columns: matrixCols, style: "table"});
 
 	    jsavMatrix1.value(0,0,"V");
-	    jsavMatrix2.value(0,0,"V");
+	    jsavMatrix2.value(0,0,"K");
 
 	    for (var i = 1; i < matrixCols; i++) 
 	    {
@@ -67,11 +66,7 @@
 		}
 
 		var objForMatrix = Knapsack.knapsack(arr_size.items, arr_size.data.capacity, jsavMatrix1, jsavMatrix2, av);
-	    console.log(objForMatrix);
-
 		var arr = objForMatrix.set;
-		console.log(arr);
-		
 
 		for(var i = 1; i < matrixRows - 1; i++)
 		{

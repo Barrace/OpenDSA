@@ -31,8 +31,7 @@
             }
             
             itemsMatrix = av.ds.matrix([tempNumberArr, tempWeightArr, tempValueArr ],{
-                style: "table",
-                left: true
+                style: "table"
             });
 
             matrix = av.ds.matrix({
@@ -44,11 +43,12 @@
             keepMatrix = av.ds.matrix({
                 rows: matrixRows,
                 columns: matrixCols,
-                style: "table"
+                style: "table",
+				visible: false
             });
 
             matrix.value(0, 0, "V");
-            keepMatrix.value(0, 0, "V");
+            keepMatrix.value(0, 0, "K");
 
             for (var i = 1; i < matrixCols; i++) {
                 matrix.value(0, i, i);
@@ -65,7 +65,7 @@
                 keepMatrix.value(1, i, 0);
             }
             
-            nextMatrixValue = Knapsack.knapsack(knap.items, knap.data.capacity, matrix, keepMatrix, av, "FillInBlank")
+            nextMatrixValue = Knapsack.knapsack(knap.items, knap.data.capacity, matrix, keepMatrix, av, "FillInBlank");
             console.log(nextMatrixValue, " ~~ FILL-IN-BLANK ANSWER")
             return nextMatrixValue;
         }
