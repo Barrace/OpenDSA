@@ -211,6 +211,15 @@ work to fill. This is a huge improvement over the orignal efficency of
 O\(2 ^ *N*\).
 
 
+
+Once a Keep Array is filled out, start in the bottom right of the matrix. 
+
+IF the number is a one, that item is kept. Move your column pointer to the left w columns, w being the weight of the item you just added. Move your row pointer to the row above it and recurse.
+
+ELSE the item is not kept. Move your row pointer to the row above it and recurse.
+
+
+
 A series of exercises are provided to help you test your knowlege of the
 0/1 Knapsack algorithm. Some of the exercises are easier if you have some
 scratch paper to work on.
