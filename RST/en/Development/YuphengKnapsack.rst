@@ -216,26 +216,34 @@ A series of exercises are provided to help you test your knowlege of the
 scratch paper to work on.
 
 
-Prototype of Knapsack 
+Knapsack Slideshow 
 ---------------------
 
 
-The following slideshow demonstrates an example of the 0/1 Knapsack problem with dynamic values. Click through to see the problem step by step.
+The following slideshow demonstrates an example of the 0/1 Knapsack problem with dynamic values. Click through to see the problem step by step. Refresh the page to randomize the problem.
 
 .. inlineav:: YuphengKnapsack1 ss
    :output: show
 
 
-Prototype of Knapsack with user input 
+Knapsack Slideshow with user input 
 -------------------------------------
 
-Here we have the same visualization with the option to have the user input their values for the problem. For example, items take the syntax - {w:1, v:2},{w:3, v:4} - w being Weight of that item and V being its Value. Also select the number of items you're entering from the list next to Reset.
+Here we have the same visualization with the option to have the user input their values for the problem. 
+
+For example, items with values - {w:1, v:2},{w:3, v:4},{w:5, v:6} - w being Weight of that item and V being its Value, would be represented in the blanks as - 
+
+Weight 1,3,5
+
+Value 2,4,6
+
+Then enter the capacity of your knapsack. FOLLOW THIS SYNTAX EXACTLY. NO SPACES.
 
 
 .. avembed:: AV/Development/YuphengKnaps/YuphengKnapsack2.html ss
 
 
-Exericse 1
+Exercise 1 - What comes next in V?
 ---------------------------------------------------------------
 
 Fill in the blank exercise where users will input the next value that will appear in the Matrix.
@@ -243,7 +251,7 @@ Fill in the blank exercise where users will input the next value that will appea
 .. avembed:: Exercises/Development/KnapsackExercise1.html ka
 
 
-Exercise 2
+Exercise 2 - Highlight final solution
 -----------------------------------------------------
 
 Given the keep array and the item information, highlight from a list the final items that make it into the knapsack. 
