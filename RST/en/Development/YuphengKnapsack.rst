@@ -229,7 +229,7 @@ The following slideshow demonstrates an example of the 0/1 Knapsack problem with
 Prototype of Knapsack with user input 
 -------------------------------------
 
-Here we have the same visualization with the option to have the user input their values for the problem. For example, items take the syntax - [{w:1, v:2},{w:3, v:4}] - w being Weight of that item and V being its Value.
+Here we have the same visualization with the option to have the user input their values for the problem. For example, items take the syntax - {w:1, v:2},{w:3, v:4} - w being Weight of that item and V being its Value. Also select the number of items you're entering from the list next to Reset.
 
 
 .. avembed:: AV/Development/YuphengKnaps/YuphengKnapsack2.html ss
@@ -252,14 +252,6 @@ Given the keep array and the item information, highlight from a list the final i
 .. avembed:: Exercises/Development/Yuphengknapsack1.html ka
 
 
-
-Exercise 3
-------------------------------------------------------
-
-A multiple choice Khan Academy Exercise if we need it.
-
-
-.. avembed:: Exercises/Development/Yuphengknapsack3.html ka
 
 
 
