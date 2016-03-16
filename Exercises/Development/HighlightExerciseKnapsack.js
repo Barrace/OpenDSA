@@ -8,7 +8,7 @@
     itemsMatrix;    // Matrix for keep
 
     var solutionArray = [];
-    var lastArr = [];
+    
 
     var highlightExerciseKnapsack = {	// Name of export object
 	userInput: null,  // Boolean: Tells us if user ever did anything
@@ -20,7 +20,7 @@
 
 	    var matrixRows = arr_size.data.numItems + 2;
 	    var matrixCols = arr_size.data.capacity + 1;
-	    
+	    var lastArr = [];
         var tempWeightArr = new Array();
         var tempValueArr = new Array();
         var tempNumberArr = new Array();
@@ -81,7 +81,7 @@
 		}
 
 		jsavArr = av.ds.array(lastArr,
-			  	  {indexed: true, center: true});
+			  	  {center: true});
 
 	    av.displayInit();
 	    av.recorded();
