@@ -79,7 +79,10 @@ var Knapsack = new function () {
             weightMatrix = new Array(numItems + 1),
             keepMatrix = new Array(numItems + 1),
             solutionSet = [];
-           
+        
+		//Show capacity   
+		av.label("Capacity: " + capacity);
+
         //Used in populateMatrix function to avoid another param pass
         currentAv = av;
         currentType = inExType;
