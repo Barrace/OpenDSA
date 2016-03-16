@@ -59,12 +59,15 @@ var Knapsack = new function () {
         };
     };
     
-    var populateMatrix = function(matrix, row, col, val) {
-        matrix.value(row, col, val);
-        //If we are at our generated random iteration
+    var populateMatrix = function(matrix, row, col, val) {        
+		//If we are at our generated random iteration
         //and this is a fill in the blank exercise, kick
         //out of the function
-        return (numCurrIterations == randIteration && currentType === "FillInBlank") ? val : -1;
+		if(numCurrIterations == randIteration && currentType === "FillInBlank"){
+			return val;
+		}
+		matrix.value(row, col, val);
+		return -1;
     }
 
     this.knapsack = function (items, capacity, matrix, inKeepMatrix, av, inExType) {
@@ -108,38 +111,38 @@ var Knapsack = new function () {
 
                     // Update the matrices
                     if (newMax > oldMax) {
-                        weightMatrix[idxItem][idxWeight] = newMax;
-                        keepMatrix[idxItem][idxWeight] = 1;
-						numCurrIterations++;
+						numCurrIterations++;   
+                        currentAv.step(); 
                         //Need to check return val so we know if need to kick out of loop
                         var popMatrix = populateMatrix(matrix, idxItem + 1, idxWeight, newMax);
                         if(popMatrix != -1) return popMatrix;
                         var popKeepMatrix = populateMatrix(inKeepMatrix, idxItem + 1, idxWeight, 1);
-                        if(popKeepMatrix != -1) return popMatrix;   
-                        currentAv.step();                     
+                        if(popKeepMatrix != -1) return popMatrix;  
+                        weightMatrix[idxItem][idxWeight] = newMax;
+                        keepMatrix[idxItem][idxWeight] = 1;                  
                     } else {
-                        weightMatrix[idxItem][idxWeight] = oldMax;
-                        keepMatrix[idxItem][idxWeight] = 0;
+                        currentAv.step(); 
 						numCurrIterations++;
                         //Need to check return val so we know if need to kick out of loop
                         var popMatrix = populateMatrix(matrix, idxItem + 1, idxWeight, oldMax);
                         if(popMatrix != -1) return popMatrix;
                         var popKeepMatrix = populateMatrix(inKeepMatrix, idxItem + 1, idxWeight, 0);
-                        if(popKeepMatrix != -1) return popMatrix;  
-                        currentAv.step();                      
+                        if(popKeepMatrix != -1) return popMatrix;     
+                        weightMatrix[idxItem][idxWeight] = oldMax;
+                        keepMatrix[idxItem][idxWeight] = 0;                  
                     }
                 }
 
                 // Else, item can't fit; value and weight are the same as before
                 else {
-                    weightMatrix[idxItem][idxWeight] = weightMatrix[idxItem - 1][idxWeight];
 					numCurrIterations++;
+					currentAv.step();  
                     //Need to check return val so we know if need to kick out of loop
                     var popMatrix = populateMatrix(matrix, idxItem + 1, idxWeight, weightMatrix[idxItem - 1][idxWeight]);
                     if(popMatrix != -1) return popMatrix;
                     var popKeepMatrix = populateMatrix(inKeepMatrix, idxItem + 1, idxWeight, 0);
-                    if(popKeepMatrix != -1) return popMatrix;     
-                    currentAv.step();                   
+                    if(popKeepMatrix != -1) return popMatrix;
+                    weightMatrix[idxItem][idxWeight] = weightMatrix[idxItem - 1][idxWeight];                     
                 }
             }
         }
