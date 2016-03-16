@@ -7,10 +7,10 @@ $(document).ready(function () {
 
 
     var knap = Knapsack.initKnapsack();
-	//console.log(knap);
+
     var weightArr, keepMatrix, valueArr, matrix, itemsMatrix;
 
-    var av = new JSAV("YuphengKnapsack1");
+    var av = new JSAV("SlideshowKnapsackDynamic");
     /*	AJ's notes
 
     We now have access to these important variables.
@@ -50,7 +50,7 @@ $(document).ready(function () {
 	itemsMatrix = av.ds.matrix([tempNumberArr, tempWeightArr, tempValueArr ],{
         style: "table",
 		left: true
-	});
+    });
 
     matrix = av.ds.matrix({
         rows: matrixRows,
@@ -87,9 +87,9 @@ $(document).ready(function () {
 	
 
     av.displayInit();
-	console.log(knap.items);
+
     var test = Knapsack.knapsack(knap.items, knap.data.capacity, matrix, keepMatrix, av);
-	console.log(test);
+
 
     av.recorded();
 

@@ -9,13 +9,13 @@
     var solutionArray = [];
     var lastArr = [];
 
-    var yuphengknapsack1 = {	// Name of export object
+    var highlightExerciseKnapsack = {	// Name of export object
 	userInput: null,  // Boolean: Tells us if user ever did anything
 
 	// Initialise the exercise
 	initJSAV: function(arr_size) {
-	    yuphengknapsack1.userInput = false;
-	    av = new JSAV("Yuphengknapsack1", {animationMode: "none"});
+	    highlightExerciseKnapsack.userInput = false;
+	    av = new JSAV("HighlightExerciseKnapsack", {animationMode: "none"});
 
 	    var matrixRows = arr_size.data.numItems + 2;
 	    var matrixCols = arr_size.data.capacity + 1;
@@ -117,8 +117,8 @@
 	if (jsavArr.isHighlight(index)) {
 	    jsavArr.unhighlight(index);
 	} else { jsavArr.highlight(index); }
-	yuphengknapsack1.userInput = true;
+	highlightExerciseKnapsack.userInput = true;
     }
     // Export name used here
-    window.yuphengknapsack1 = window.yuphengknapsack1 || yuphengknapsack1;
+    window.highlightExerciseKnapsack = window.highlightExerciseKnapsack || highlightExerciseKnapsack;
 }());
